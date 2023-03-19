@@ -2,22 +2,62 @@
 
 .sort {
   position: relative;
+
+  .sort {
+    &__image {
+      transform: rotate(0deg);
+      animation-name: roll-down;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+
+      &.active {
+        animation-name: roll-up;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-out;
+        transform: rotate(180deg);
+      }
+
+      @keyframes roll-up {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(180deg);
+        }
+      }
+      @keyframes roll-down {
+        0% {
+          transform: rotate(180deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  }
+
   &__label {
     display: flex;
     align-items: center;
 
     svg {
-      margin-right: 8px;
+      align-items: center;
+      justify-content: center;
+      height: 12px;
     }
 
     b {
-      margin-right: 8px;
+      margin: 0 8px 0;
     }
 
     span {
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
+      -webkit-user-select: none; /* запретить выделение для webkit браузеров */
+      -moz-user-select: none; /* запретить выделение для Firefox */
+      -ms-user-select: none; /* запретить выделение для IE */
+      user-select: none; /* запретить выделение для остальных браузеров */
     }
   }
 
@@ -37,7 +77,10 @@
       li {
         padding: 12px 20px;
         cursor: pointer;
-
+        -webkit-user-select: none; /* запретить выделение для webkit браузеров */
+        -moz-user-select: none; /* запретить выделение для Firefox */
+        -ms-user-select: none; /* запретить выделение для IE */
+        user-select: none; /* запретить выделение для остальных браузеров */
         &.active,
         &:hover {
           background: rgba(254, 95, 30, 0.05);
