@@ -2,7 +2,9 @@
 
 .sort {
   position: relative;
-
+  @media (max-width: 1350px) {
+    margin-bottom: 18px;
+  }
   .sort {
     &__image {
       transform: rotate(0deg);
@@ -48,9 +50,15 @@
 
     b {
       margin: 0 8px 0;
+      @media (max-width: 630px) {
+        display: none;
+      }
     }
 
     span {
+      @media (max-width: 630px) {
+        margin: 0 8px 0;
+      }
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
@@ -71,11 +79,21 @@
     overflow: hidden;
     padding: 10px 0;
     width: 160px;
+    @media (max-width: 1240px) {
+      right: -30px;
+    }
+    @media (max-width: 630px) {
+      right: -8px;
+      width: 132px;
+    }
 
     ul {
       overflow: hidden;
       li {
         padding: 12px 20px;
+        @media (max-width: 630px) {
+          padding: 5px 10px;
+        }
         cursor: pointer;
         -webkit-user-select: none; /* запретить выделение для webkit браузеров */
         -moz-user-select: none; /* запретить выделение для Firefox */

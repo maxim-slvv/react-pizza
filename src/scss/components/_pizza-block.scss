@@ -8,6 +8,15 @@
   width: 280px;
   text-align: center;
   margin: 0px 10px 65px;
+  @media (max-width: 1500px) {
+    margin: 0px 10px 30px;
+  }
+  @media (max-width: 1090px) {
+    margin: 0px 5px 35px;
+  }
+  @media (max-width: 670px) {
+    margin: 0px 0px 35px;
+  }
 
   &__image {
     display: flex;

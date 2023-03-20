@@ -26,7 +26,7 @@ export function Home() {
     func();
   }, []);
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -46,6 +46,6 @@ export function Home() {
               />
             ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -3,15 +3,27 @@
 .categories {
   ul {
     display: flex;
-
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     li {
       background-color: #f9f9f9;
       padding: 13px 30px;
+
+      @media (max-width: 630px) {
+        padding: 8px 20px;
+        font-size: 15px;
+      }
+      @media (max-width: 400px) {
+        padding: 5px 15px;
+        font-size: 12px;
+      }
       border-radius: 30px;
       margin-right: 10px;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
+      margin-bottom: 10px;
       @include noselect();
 
       &:hover {
