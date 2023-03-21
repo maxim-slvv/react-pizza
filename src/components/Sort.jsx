@@ -1,14 +1,16 @@
 import React from 'react';
 
-export function Sort() {
+export function Sort({ value, onChangeSort, isMoreOrLess }) {
   const [open, setOpen] = React.useState(false);
+  //TODO: сделать сортировку для цен в обратную сторону
+  const list = [
+    { name: 'популярности', type: 'asc', sortProperty: 'rating' },
+    { name: 'цене', type: 'desc', sortProperty: 'price' },
+    { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
+  ];
 
-  const list = ['популярности', 'цене', 'алфавиту'];
-
-  const [listSelect, setListSelect] = React.useState(list[0]);
-
-  const onClickListItem = (item) => {
-    setListSelect(item);
+  const onClickListItem = (obj) => {
+    onChangeSort(obj);
     setOpen(false);
   };
 
@@ -30,24 +32,26 @@ export function Sort() {
         </div>
 
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{listSelect}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
           <ul>
-            {list.map((item, i) => {
+            {list.map((obj, i) => {
               return (
                 <li
                   key={i}
-                  onClick={() => onClickListItem(item)}
-                  className={listSelect === item ? 'active' : ''}>
-                  {item}
+                  onClick={() => onClickListItem(obj)}
+                  className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                  {obj.name}
                 </li>
               );
             })}
           </ul>
         </div>
       )}
+      <button onClick={() => isMoreOrLess('asc')}> ↑ </button>
+      <button onClick={() => isMoreOrLess('desc')}> ↓ </button>
     </div>
   );
 }

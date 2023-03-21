@@ -8,14 +8,24 @@ import { PizzaSkeleton } from '../components/PizzaSkeleton';
 
 export function Home() {
   const [items, setItems] = React.useState([]);
-
   const [loading, setLoading] = React.useState(true);
+
+  const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' });
+  //TODO: сделать сортировку для цен в обратную сторону
+  const [orderType, setOrderType] = React.useState('asc');
+
+  const category = categoryId ? `category=${categoryId}` : '';
+  const sortBy = sortType.sortProperty ? sortType.sortProperty : '';
 
   React.useEffect(() => {
     const func = async () => {
       try {
+        setLoading(true);
         const pizzasResponse = await axios
-          .get('https://640c843094ce1239b0af1fc8.mockapi.io/pizzas')
+          .get(
+            `https://640c843094ce1239b0af1fc8.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${orderType}`,
+          )
           .then((res) => res.data);
         setItems(pizzasResponse);
         setLoading(false);
@@ -25,12 +35,17 @@ export function Home() {
     };
     func();
     window.scrollTo(0, 0);
-  }, []);
+  }, [categoryId, sortType, orderType]);
+
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories value={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
+        <Sort
+          value={sortType}
+          onChangeSort={(obj) => setSortType(obj)}
+          isMoreOrLess={(bool) => setOrderType(bool)}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
