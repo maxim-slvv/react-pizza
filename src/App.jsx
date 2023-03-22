@@ -8,10 +8,10 @@ import { NotFound } from './pages/NotFound';
 
 import './scss/app.scss';
 
-export const SearchContext = React.createContext();
+export const SearchContext = React.createContext({});
 
 export function App() {
-  const { searchValue, setSearchValue } = React.useState(SearchContext);
+  const [searchValue, setSearchValue] = React.useState('');
 
   return (
     <SearchContext.Provider value={{ searchValue, setSearchValue }}>
