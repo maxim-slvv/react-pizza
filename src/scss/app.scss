@@ -68,7 +68,8 @@ body {
     align-content: center;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    //! Вернуть 2 грида
+    grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 0px;
     padding-left: auto;

@@ -1,0 +1,48 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  -webkit-user-select: none; /* запретить выделение для webkit браузеров */
+  -moz-user-select: none; /* запретить выделение для Firefox */
+  -ms-user-select: none; /* запретить выделение для IE */
+  user-select: none; /* запретить выделение для остальных браузеров */
+  display: flex;
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    border: 1px solid #fe5f1e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: rgb(0, 0, 0);
+    }
+  }
+  li:not(:last-of-type) {
+    margin-right: 15px;
+  }
+  :global {
+    li.selected {
+      display: flex;
+      background-color: #fe5f1e;
+      color: white;
+      border-radius: 50%;
+      a {
+        color: white;
+      }
+    }
+    li:hover:not(.selected) {
+      background-color: #ddd;
+      border-radius: 50%;
+      height: 40px;
+    }
+  }
+}
