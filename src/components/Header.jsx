@@ -3,7 +3,7 @@ import { Search } from '../components/Search/';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
 
-export function Header({ searchValue, setSearchValue }) {
+export function Header() {
   return (
     <div className="header">
       <div className="container">
@@ -16,7 +16,7 @@ export function Header({ searchValue, setSearchValue }) {
             </div>
           </div>
         </Link>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         <Link to="/cart">
           <div className="header__cart">
             <button className="button button--cart">

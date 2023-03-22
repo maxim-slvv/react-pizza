@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+import { SearchContext } from '../App';
+
 import { Categories } from '../components/Categories';
 import { Sort } from '../components/Sort';
 import { PizzaCard } from '../components/PizzaCard';
 import { PizzaSkeleton } from '../components/PizzaSkeleton';
 import { Pagination } from '../components/Pagination';
 
-export function Home({ searchValue }) {
+export function Home() {
+  const { searchValue } = React.useState(SearchContext);
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
