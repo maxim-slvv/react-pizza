@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
 import { SearchContext } from '../App';
 
@@ -10,12 +12,22 @@ import { PizzaSkeleton } from '../components/PizzaSkeleton';
 import { Pagination } from '../components/Pagination';
 
 export function Home() {
+  // //*тут у нас само состояние вытаскивается - а не весь стейт
+  const categoryId = useSelector((state) => state.filter.categoryId);
+  console.log({ categoryId });
+  // //*а этим хуком мы будем менять состояние
+  const dispatch = useDispatch();
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
+
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const [categoryId, setCategoryId] = React.useState(0);
+  // const [categoryId, setCategoryId] = React.useState(0);
   const [sortType, setSortType] = React.useState({ name: 'популярности', sortProperty: 'rating' });
   //TODO: сделать сортировку для цен в обратную сторону
   const [orderType, setOrderType] = React.useState('asc');
@@ -61,7 +73,7 @@ export function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort
           value={sortType}
           onChangeSort={(obj) => setSortType(obj)}
