@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { SearchContext } from '../App';
 
@@ -11,7 +11,7 @@ import { PizzaSkeleton } from '../components/PizzaSkeleton';
 import { Pagination } from '../components/Pagination';
 
 export function Home() {
-  const { categoryId, sortType } = useSelector((state) => state.filter);
+  const { categoryId, sortType, orderType } = useSelector((state) => state.filter);
 
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
@@ -19,7 +19,6 @@ export function Home() {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   //TODO: сделать сортировку для цен в обратную сторону
-  const [orderType, setOrderType] = React.useState('asc');
 
   const page = `&page=${currentPage}&limit=4`;
   const category = categoryId ? `category=${categoryId}` : '';
