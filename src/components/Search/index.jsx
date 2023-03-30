@@ -7,15 +7,18 @@ import styles from './Search.module.scss';
 export const Search = () => {
   const { searchValue, setSearchValue } = React.useContext(SearchContext);
 
+  const inputRef = React.useRef();
   const onClickClear = () => {
     setSearchValue('');
-    document.querySelector('input').focus();
+    // document.querySelector('input').focus();
+    inputRef.current.focus();
   };
 
   return (
     <div className={styles.block}>
       <input
         onChange={(e) => setSearchValue(e.target.value)}
+        ref={inputRef}
         value={searchValue}
         className={styles.input}
         placeholder="Поиск Пиццы..."

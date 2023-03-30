@@ -43,6 +43,7 @@ export function Home() {
     };
     func();
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [categoryId, sortType, orderType, searchValue, currentPage]);
 
   const pizzas = items.map((obj) => (
