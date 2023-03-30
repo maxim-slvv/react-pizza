@@ -1,6 +1,11 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortType, setOrderType } from '../redux/slices/filterSlice';
 
-export function Sort({ value, onChangeSort, isMoreOrLess }) {
+export function Sort() {
+  const sortType = useSelector((state) => state.filter.sortType);
+  const dispatch = useDispatch();
+
   const [open, setOpen] = React.useState(false);
   //TODO: сделать сортировку для цен в обратную сторону
   const list = [
@@ -10,7 +15,7 @@ export function Sort({ value, onChangeSort, isMoreOrLess }) {
   ];
 
   const onClickListItem = (obj) => {
-    onChangeSort(obj);
+    dispatch(setSortType(obj));
     setOpen(false);
   };
 
@@ -32,7 +37,7 @@ export function Sort({ value, onChangeSort, isMoreOrLess }) {
         </div>
 
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{value.name}</span>
+        <span onClick={() => setOpen(!open)}>{sortType.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -42,7 +47,7 @@ export function Sort({ value, onChangeSort, isMoreOrLess }) {
                 <li
                   key={i}
                   onClick={() => onClickListItem(obj)}
-                  className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                  className={sortType.sortProperty === obj.sortProperty ? 'active' : ''}>
                   {obj.name}
                 </li>
               );
@@ -50,8 +55,8 @@ export function Sort({ value, onChangeSort, isMoreOrLess }) {
           </ul>
         </div>
       )}
-      <button onClick={() => isMoreOrLess('asc')}> ↑ </button>
-      <button onClick={() => isMoreOrLess('desc')}> ↓ </button>
+      <button onClick={() => dispatch(setOrderType('asc'))}> ↑ </button>
+      <button onClick={() => dispatch(setOrderType('desc'))}> ↓ </button>
     </div>
   );
 }
