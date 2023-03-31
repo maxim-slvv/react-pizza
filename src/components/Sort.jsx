@@ -19,6 +19,10 @@ export function Sort() {
     setOpen(false);
   };
 
+  const onClickArrow = (str) => {
+    dispatch(setOrderType(str));
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -55,8 +59,8 @@ export function Sort() {
           </ul>
         </div>
       )}
-      <button onClick={() => dispatch(setOrderType('asc'))}> ↑ </button>
-      <button onClick={() => dispatch(setOrderType('desc'))}> ↓ </button>
+      <button onClick={() => onClickArrow('asc')}> ↑ </button>
+      <button onClick={() => onClickArrow('desc')}> ↓ </button>
     </div>
   );
 }

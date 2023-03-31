@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCurrentPage } from '../redux/slices/filterSlice';
 
 import { SearchContext } from '../App';
 
@@ -12,12 +13,11 @@ import { Pagination } from '../components/Pagination';
 
 export function Home() {
   const { categoryId, sortType, orderType } = useSelector((state) => state.filter);
-
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [currentPage, setCurrentPage] = React.useState(1);
-
+  // const [currentPage, setCurrentPage] = React.useState(1);
+  const currentPage = useSelector((state) => state.filter.currentPage);
   //TODO: сделать сортировку для цен в обратную сторону
 
   const page = `&page=${currentPage}&limit=4`;
@@ -44,7 +44,7 @@ export function Home() {
     func();
     window.scrollTo(0, 0);
     // eslint-disable-next-line
-  }, [categoryId, sortType, orderType, searchValue, currentPage]);
+  }, [categoryId, sortType, order, orderType, searchValue, currentPage]);
 
   const pizzas = items.map((obj) => (
     <PizzaCard
@@ -74,7 +74,7 @@ export function Home() {
       //TODO: тоесть налету меняется картинка и потом медленно сужение изображения
       //TODO: а в корзине будут высвечиваться добавки и прочее */}
       <div className="content__items">{loading ? skeletons : pizzas}</div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} />
+      <Pagination />
     </div>
   );
 }
