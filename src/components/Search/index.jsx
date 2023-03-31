@@ -14,7 +14,7 @@ export const Search = () => {
     debounce((str) => {
       console.log(str);
       setSearchValue(str);
-    }, 250),
+    }, 400),
     [],
   );
 
