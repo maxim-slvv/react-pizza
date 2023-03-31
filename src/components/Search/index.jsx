@@ -9,7 +9,7 @@ export const Search = () => {
   const { setSearchValue } = React.useContext(SearchContext);
 
   const [value, setValue] = React.useState('');
-
+  // eslint-disable-next-line
   const updateSearchValue = React.useCallback(
     debounce((str) => {
       console.log(str);
