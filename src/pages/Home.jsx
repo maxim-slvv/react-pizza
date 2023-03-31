@@ -56,8 +56,8 @@ export function Home() {
       types={obj.types}
     />
   ));
-
-  const skeletons = [...new Array(6)].map((_, id) => <PizzaSkeleton key={id} />);
+  //TODO: вернуть фэйковый массив на 6 пицц - или не надо будет...
+  const skeletons = [...new Array(4)].map((_, id) => <PizzaSkeleton key={id} />);
 
   return (
     <div className="container">
