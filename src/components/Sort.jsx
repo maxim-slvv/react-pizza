@@ -12,6 +12,7 @@ export const list = [
 export function Sort() {
   const sortType = useSelector((state) => state.filter.sortType);
   const dispatch = useDispatch();
+  const sortRef = React.useRef();
 
   const [open, setOpen] = React.useState(false);
 
@@ -24,8 +25,14 @@ export function Sort() {
     dispatch(setOrderType(str));
   };
 
+  React.useEffect(() => {
+    document.body.addEventListener('click', (event) => {
+      console.log(event.path || (event.composedPath && event.composedPath()));
+    });
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <div className={`sort__image ${open === true ? 'active' : ''}`}>
           <svg
