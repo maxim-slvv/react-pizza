@@ -12,7 +12,6 @@ export const Search = () => {
   // eslint-disable-next-line
   const updateSearchValue = React.useCallback(
     debounce((str) => {
-      console.log(str);
       setSearchValue(str);
     }, 400),
     [],

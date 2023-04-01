@@ -6,6 +6,7 @@ const initialState = {
   orderType: 'asc',
   currentPage: 1,
 };
+console.log(initialState);
 
 export const filterSlice = createSlice({
   name: 'filter',
@@ -21,12 +22,19 @@ export const filterSlice = createSlice({
       state.orderType = action.payload;
     },
     setCurrentPage(state, action) {
-      console.log(action.payload);
       state.currentPage = action.payload;
+    },
+    setFilters(state, action) {
+      state.categoryId = Number(action.payload.categoryId);
+      state.sortType.sortProperty = action.payload.sortProperty;
+      state.orderType = action.payload.orderType;
+      state.currentPage = Number(action.payload.currentPage);
+      state.sortType.name = action.payload.sort.name;
     },
   },
 });
 
-export const { setCategoryId, setSortType, setOrderType, setCurrentPage } = filterSlice.actions;
+export const { setCategoryId, setSortType, setOrderType, setCurrentPage, setFilters } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -1,18 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, setOrderType } from '../redux/slices/filterSlice';
+//TODO: сделать сортировку для цен в обратную сторону
+
+export const list = [
+  { name: 'популярности', type: 'asc', sortProperty: 'rating' },
+  { name: 'цене', type: 'desc', sortProperty: 'price' },
+  { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
+];
 
 export function Sort() {
   const sortType = useSelector((state) => state.filter.sortType);
   const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
-  //TODO: сделать сортировку для цен в обратную сторону
-  const list = [
-    { name: 'популярности', type: 'asc', sortProperty: 'rating' },
-    { name: 'цене', type: 'desc', sortProperty: 'price' },
-    { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
-  ];
 
   const onClickListItem = (obj) => {
     dispatch(setSortType(obj));
