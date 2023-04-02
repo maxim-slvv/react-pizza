@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { setFilters } from '../redux/slices/filterSlice';
+import { setItems } from '../redux/slices/pizzasSlice';
 
 import { SearchContext } from '../App';
 import { Categories } from '../components/Categories';
@@ -19,9 +20,10 @@ export function Home() {
   const isMounted = React.useRef(false);
 
   const { categoryId, sortType, orderType, currentPage } = useSelector((state) => state.filter);
+  const items = useSelector((state) => state.pizzas.items);
 
   const { searchValue } = React.useContext(SearchContext);
-  const [items, setItems] = React.useState([]);
+  // const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   //TODO: сделать сортировку для цен в обратную сторону
@@ -35,10 +37,10 @@ export function Home() {
     const search = searchValue ? `&search=${searchValue}` : '';
     const func = async () => {
       try {
-        const res = await axios.get(
+        const { data } = await axios.get(
           `https://640c843094ce1239b0af1fc8.mockapi.io/pizzas?${page}${category}${sortBy}${order}${search}`,
         );
-        setItems(res.data);
+        dispatch(setItems(data));
       } catch (error) {
         alert(`Ошибка при получении списка пицц ${error}`);
       } finally {
