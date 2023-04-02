@@ -2,11 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addItem } from '../redux/slices/cartSlices';
-
+const typeNames = ['Тонкое', 'Традиционное'];
 export function PizzaCard({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
-  //потом этот счетчик уберем отсюда
-  const [pizzaCount, setPizzaCount] = React.useState(0);
+
+  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+  const addedCount = cartItem ? cartItem.count : 0;
+
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -16,14 +18,10 @@ export function PizzaCard({ id, title, price, imageUrl, sizes, types }) {
       title,
       price,
       imageUrl,
-      type: activeType,
+      type: typeNames[activeType],
       size: activeSize,
     };
     dispatch(addItem(item));
-  };
-
-  const onAddPizza = () => {
-    return setPizzaCount((prev) => (prev += 1));
   };
 
   return (
@@ -71,7 +69,7 @@ export function PizzaCard({ id, title, price, imageUrl, sizes, types }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{pizzaCount}</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>
