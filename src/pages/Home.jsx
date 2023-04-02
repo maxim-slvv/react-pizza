@@ -115,6 +115,7 @@ export function Home() {
       title={obj.title}
       price={obj.price}
       key={obj.id}
+      id={obj.id}
       imageUrl={obj.imageUrl}
       sizes={obj.sizes}
       types={obj.types}

@@ -6,7 +6,6 @@ const initialState = {
   orderType: 'asc',
   currentPage: 1,
 };
-console.log(initialState);
 
 export const filterSlice = createSlice({
   name: 'filter',
