@@ -26,9 +26,13 @@ export function Sort() {
   };
 
   React.useEffect(() => {
-    document.body.addEventListener('click', (event) => {
-      console.log(event.path || (event.composedPath && event.composedPath()));
-    });
+    const handleClickOutside = (event) => {
+      if (!(event.path || (event.composedPath && event.composedPath())).includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener('click', handleClickOutside);
+    return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
 
   return (
