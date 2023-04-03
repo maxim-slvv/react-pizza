@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
+
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { setFilters } from '../redux/slices/filterSlice';
-import { setItems } from '../redux/slices/pizzasSlice';
+import { fetchPizzas } from '../redux/slices/pizzasSlice';
 
 import { SearchContext } from '../App';
 import { Categories } from '../components/Categories';
@@ -23,12 +23,11 @@ export function Home() {
   const items = useSelector((state) => state.pizzas.items);
 
   const { searchValue } = React.useContext(SearchContext);
-  // const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   //TODO: сделать сортировку для цен в обратную сторону
 
-  const fetchPizzas = () => {
+  const getPizzas = () => {
     setLoading(true);
     const page = `&page=${currentPage}&limit=4`;
     const category = categoryId ? `category=${categoryId}` : '';
@@ -37,10 +36,7 @@ export function Home() {
     const search = searchValue ? `&search=${searchValue}` : '';
     const func = async () => {
       try {
-        const { data } = await axios.get(
-          `https://640c843094ce1239b0af1fc8.mockapi.io/pizzas?${page}${category}${sortBy}${order}${search}`,
-        );
-        dispatch(setItems(data));
+        dispatch(fetchPizzas(page, category, sortBy, order, search));
       } catch (error) {
         alert(`Ошибка при получении списка пицц ${error}`);
       } finally {
@@ -85,7 +81,7 @@ export function Home() {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
     isSearch.current = false;
     // eslint-disable-next-line
