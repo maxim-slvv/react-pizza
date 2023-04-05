@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSortType, setOrderType } from '../redux/slices/filterSlice';
+import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterSlice';
 //TODO: сделать сортировку для цен в обратную сторону
 
 export const list = [
@@ -10,7 +10,7 @@ export const list = [
 ];
 
 export function Sort() {
-  const sortType = useSelector((state) => state.filter.sortType);
+  const { sortType } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const sortRef = React.useRef();
 

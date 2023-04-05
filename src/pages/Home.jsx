@@ -3,10 +3,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setFilters } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { setFilters, selectFilter } from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
-import { SearchContext } from '../App';
 import { Categories } from '../components/Categories';
 import { Sort, list } from '../components/Sort';
 import { PizzaCard } from '../components/PizzaCard';
@@ -19,9 +18,8 @@ export function Home() {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categoryId, sortType, orderType, currentPage } = useSelector((state) => state.filter);
-  const { items, status } = useSelector((state) => state.pizzas);
-  const { searchValue } = React.useContext(SearchContext);
+  const { categoryId, sortType, orderType, currentPage, searchValue } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizzas);
 
   //TODO: сделать сортировку для цен в обратную сторону
 
