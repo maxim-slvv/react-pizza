@@ -4,13 +4,14 @@ import axios from 'axios';
 export const fetchPizzas = createAsyncThunk('pizzas/fetchPizzasStatus', async (params) => {
   const { page, category, sortBy, order, search } = params;
   const { data } = await axios.get(
-    `https://-640c843094ce1239b0af1fc8.mockapi.io/pizzas?${page}${category}${sortBy}${order}${search}`,
+    `https://640c843094ce1239b0af1fc8.mockapi.io/pizzas?${page}${category}${sortBy}${order}${search}`,
   );
   return data;
 });
 
 const initialState = {
   items: [],
+  status: 'loading',
 };
 
 export const pizzasSlice = createSlice({
@@ -25,17 +26,17 @@ export const pizzasSlice = createSlice({
     builder
       .addCase(fetchPizzas.pending, (state) => {
         state.status = 'loading';
-        state.items = [];
+        state.items = []; //очистка во время загрузки
         console.log('Идет отправка');
       })
       .addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
         state.status = 'success';
-        console.log(state, 'все ОК');
+        console.log('все ОК', state);
       })
       .addCase(fetchPizzas.rejected, (state) => {
         state.status = 'error';
-        state.items = [];
+        state.items = []; //очищаем если ошибка что бы старые не хранить
         console.log('Была ошибка');
       });
   },

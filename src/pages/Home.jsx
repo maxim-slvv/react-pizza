@@ -20,30 +20,19 @@ export function Home() {
   const isMounted = React.useRef(false);
 
   const { categoryId, sortType, orderType, currentPage } = useSelector((state) => state.filter);
-  const items = useSelector((state) => state.pizzas.items);
-
+  const { items, status } = useSelector((state) => state.pizzas);
   const { searchValue } = React.useContext(SearchContext);
-  const [loading, setLoading] = React.useState(true);
 
   //TODO: сделать сортировку для цен в обратную сторону
 
-  const getPizzas = () => {
-    setLoading(true);
+  const getPizzas = async () => {
     const page = `&page=${currentPage}&limit=4`;
     const category = categoryId ? `category=${categoryId}` : '';
     const sortBy = sortType.sortProperty ? `&sortBy=${sortType.sortProperty}` : '';
     const order = orderType ? `&order=${orderType}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
-    const func = async () => {
-      try {
-        dispatch(fetchPizzas(page, category, sortBy, order, search));
-      } catch (error) {
-        alert(`Ошибка при получении списка пицц ${error}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-    func();
+
+    dispatch(fetchPizzas({ page, category, sortBy, order, search }));
   };
 
   //TODO: при обновлении страницы сделать так что бы отправлялся запрос
@@ -115,7 +104,7 @@ export function Home() {
       //TODO: при выборе друго размера - меняется размер
       //TODO: тоесть налету меняется картинка и потом медленно сужение изображения
       //TODO: а в корзине будут высвечиваться добавки и прочее */}
-      <div className="content__items">{loading ? skeletons : pizzas}</div>
+      <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       <Pagination />
     </div>
   );
