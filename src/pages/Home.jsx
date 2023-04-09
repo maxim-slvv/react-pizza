@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
@@ -75,16 +75,14 @@ export function Home() {
   }, [categoryId, sortType, orderType, searchValue, currentPage]);
 
   const pizzas = items.map((obj) => (
-    <Link key={obj.id} to={`/pizza/${obj.id}`}>
-      <PizzaCard
-        title={obj.title}
-        price={obj.price}
-        id={obj.id}
-        imageUrl={obj.imageUrl}
-        sizes={obj.sizes}
-        types={obj.types}
-      />
-    </Link>
+    <PizzaCard
+      title={obj.title}
+      price={obj.price}
+      id={obj.id}
+      imageUrl={obj.imageUrl}
+      sizes={obj.sizes}
+      types={obj.types}
+    />
   ));
   //TODO: вернуть фэйковый массив на 6 пицц - или не надо будет...
   const skeletons = [...new Array(4)].map((_, id) => <PizzaSkeleton key={id} />);
