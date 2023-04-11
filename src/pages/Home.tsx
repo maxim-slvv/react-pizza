@@ -12,7 +12,7 @@ import { PizzaCard } from '../components/PizzaCard';
 import { PizzaSkeleton } from '../components/PizzaSkeleton';
 import { Pagination } from '../components/Pagination';
 
-export function Home() {
+export const Home: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
@@ -30,7 +30,11 @@ export function Home() {
     const order = orderType ? `&order=${orderType}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    dispatch(fetchPizzas({ page, category, sortBy, order, search }));
+    dispatch(
+      //TODO типизировать
+      //@ts-ignore
+      fetchPizzas({ page, category, sortBy, order, search }),
+    );
   };
 
   //TODO: при обновлении страницы сделать так что бы отправлялся запрос
@@ -73,8 +77,8 @@ export function Home() {
     isSearch.current = false;
     // eslint-disable-next-line
   }, [categoryId, sortType, orderType, searchValue, currentPage]);
-
-  const pizzas = items.map((obj) => (
+  //TODO типизировать
+  const pizzas = items.map((obj: any) => (
     <PizzaCard
       title={obj.title}
       price={obj.price}
@@ -105,4 +109,4 @@ export function Home() {
       <Pagination />
     </div>
   );
-}
+};

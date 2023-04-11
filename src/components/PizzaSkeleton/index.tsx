@@ -2,7 +2,7 @@ import ContentLoader from 'react-content-loader';
 
 import styles from './PizzaSkeleton.module.scss';
 
-export function PizzaSkeleton() {
+export const PizzaSkeleton: React.FC = () => {
   return (
     <div className={styles.skeleton}>
       <ContentLoader
@@ -21,4 +21,4 @@ export function PizzaSkeleton() {
       </ContentLoader>
     </div>
   );
-}
+};

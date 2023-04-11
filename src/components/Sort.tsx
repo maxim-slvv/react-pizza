@@ -3,7 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterSlice';
 //TODO: сделать сортировку для цен в обратную сторону
 
-export const list = [
+// const ObjectInformation = {
+//   age: 15,
+//   sity: 'Moskow'
+// }
+
+type ListItem = {
+  name: string;
+  type: string;
+  sortProperty: string;
+};
+
+export const list: ListItem[] = [
   { name: 'популярности', type: 'asc', sortProperty: 'rating' },
   { name: 'цене', type: 'desc', sortProperty: 'price' },
   { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
@@ -12,21 +23,22 @@ export const list = [
 export function Sort() {
   const { sortType } = useSelector(selectFilter);
   const dispatch = useDispatch();
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = React.useState(false);
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: ListItem) => {
     dispatch(setSortType(obj));
     setOpen(false);
   };
 
-  const onClickArrow = (str) => {
+  const onClickArrow = (str: string) => {
     dispatch(setOrderType(str));
   };
 
   React.useEffect(() => {
-    const handleClickOutside = (event) => {
+    //TODO типизировать event нормально
+    const handleClickOutside = (event: any) => {
       if (!(event.path || (event.composedPath && event.composedPath())).includes(sortRef.current)) {
         setOpen(false);
       }

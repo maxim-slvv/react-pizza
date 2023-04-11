@@ -11,22 +11,23 @@ export const Search = () => {
   const [value, setValue] = React.useState('');
   // eslint-disable-next-line
   const updateSearchValue = React.useCallback(
-    debounce((str) => {
+    //TODO типизировать str
+    debounce((str: any) => {
       dispatch(setSearchValue(str));
     }, 400),
     [],
   );
-
-  const onChangeInput = (e) => {
+  // TODO типизировать E
+  const onChangeInput = (e: any) => {
     setValue(e.target.value);
     updateSearchValue(e.target.value);
   };
 
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const onClickClear = () => {
     dispatch(setSearchValue(''));
     setValue('');
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   return (
@@ -50,7 +51,7 @@ export const Search = () => {
       </svg>
       {value && (
         <svg
-          onClick={() => onClickClear('')}
+          onClick={() => onClickClear()}
           className="svgTwo"
           height="48"
           viewBox="0 0 48 48"

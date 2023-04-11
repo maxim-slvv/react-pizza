@@ -5,7 +5,7 @@ import { selectFilter, setCurrentPage } from '../../redux/slices/filterSlice';
 
 import styles from './Pagination.module.scss';
 
-export const Pagination = () => {
+export const Pagination: React.FC = () => {
   const dispatch = useDispatch();
   const { currentPage } = useSelector(selectFilter);
   return (
@@ -19,7 +19,6 @@ export const Pagination = () => {
       pageCount={3} //?страниц будет 3 (в идеале backend должен вернуть число страниц
       //? и мы бы его сюда подставили)
       previousLabel="<"
-      renderOnZeroPageCount={null}
     />
   );
 };

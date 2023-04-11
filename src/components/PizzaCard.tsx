@@ -4,7 +4,24 @@ import { Link } from 'react-router-dom';
 
 import { addItem, selectCartItemById } from '../redux/slices/cartSlices';
 const typeNames = ['Тонкое', 'Традиционное'];
-export function PizzaCard({ id, title, price, imageUrl, sizes, types }) {
+
+type PizzaCardProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+export const PizzaCard: React.FC<PizzaCardProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const dispatch = useDispatch();
 
   const cartItem = useSelector(selectCartItemById(id));
@@ -77,4 +94,4 @@ export function PizzaCard({ id, title, price, imageUrl, sizes, types }) {
       </div>
     </div>
   );
-}
+};
