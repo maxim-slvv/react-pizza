@@ -3,11 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterSlice';
 //TODO: сделать сортировку для цен в обратную сторону
 
-// const ObjectInformation = {
-//   age: 15,
-//   sity: 'Moskow'
-// }
-
 type ListItem = {
   name: string;
   type: string;
@@ -20,7 +15,7 @@ export const list: ListItem[] = [
   { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
 ];
 
-export function Sort() {
+export const Sort: React.FC = () => {
   const { sortType } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -37,9 +32,11 @@ export function Sort() {
   };
 
   React.useEffect(() => {
-    //TODO типизировать event нормально
-    const handleClickOutside = (event: any) => {
-      if (!(event.path || (event.composedPath && event.composedPath())).includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        sortRef.current &&
+        !(event.composedPath && event.composedPath()).includes(sortRef.current)
+      ) {
         setOpen(false);
       }
     };
@@ -87,4 +84,4 @@ export function Sort() {
       <button onClick={() => onClickArrow('desc')}> ↓ </button>
     </div>
   );
-}
+};

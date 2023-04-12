@@ -6,7 +6,7 @@ import { setSearchValue } from '../../redux/slices/filterSlice';
 
 import styles from './Search.module.scss';
 
-export const Search = () => {
+export const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
   // eslint-disable-next-line
@@ -17,13 +17,14 @@ export const Search = () => {
     }, 400),
     [],
   );
-  // TODO типизировать E
-  const onChangeInput = (e: any) => {
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     updateSearchValue(e.target.value);
   };
 
   const inputRef = React.useRef<HTMLInputElement>(null);
+
   const onClickClear = () => {
     dispatch(setSearchValue(''));
     setValue('');
