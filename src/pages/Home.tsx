@@ -78,14 +78,19 @@ export const Home: React.FC = () => {
     // eslint-disable-next-line
   }, [categoryId, sortType, orderType, searchValue, currentPage]);
   //TODO типизировать
+
   const pizzas = items.map((obj: any) => (
     <PizzaCard
-      title={obj.title}
-      price={obj.price}
+      key={obj.id}
       id={obj.id}
       imageUrl={obj.imageUrl}
+      title={obj.title}
       sizes={obj.sizes}
       types={obj.types}
+      price={obj.price}
+      count={obj.count}
+      //TODO проверить нужны ли они
+      // рейтинг и категория где?
     />
   ));
   //TODO: вернуть фэйковый массив на 6 пицц - или не надо будет...
