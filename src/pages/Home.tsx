@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { setFilters, selectFilter } from '../redux/slices/filterSlice';
@@ -11,9 +11,10 @@ import { Sort, list } from '../components/Sort';
 import { PizzaCard } from '../components/PizzaCard';
 import { PizzaSkeleton } from '../components/PizzaSkeleton';
 import { Pagination } from '../components/Pagination';
+import { useAppDispatch } from '../redux/store';
 
 export const Home: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -30,15 +31,9 @@ export const Home: React.FC = () => {
     const order = orderType ? `&order=${orderType}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    dispatch(
-      //TODO типизировать
-      //@ts-ignore
-      fetchPizzas({ page, category, sortBy, order, search }),
-    );
+    dispatch(fetchPizzas({ page, category, sortBy, order, search }));
   };
 
-  //TODO: при обновлении страницы сделать так что бы отправлялся запрос
-  //*это был переломный 15 видос
   React.useEffect(() => {
     if (isMounted.current) {
       //!ПОНАЧАЛУ ЭТОГО НЕ БУДЕТ
@@ -51,6 +46,11 @@ export const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
+    //TODO: при обновлении страницы сделать так что бы отправлялся запрос
+    //*это был переломный 15 видос
+    if (!window.location.search) {
+      dispatch(fetchPizzas({}));
+    }
     // eslint-disable-next-line
   }, [categoryId, sortType, orderType, searchValue, currentPage]);
 
