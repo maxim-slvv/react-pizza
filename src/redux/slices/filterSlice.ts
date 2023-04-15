@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-type Sort = {
+type SortSlice = {
   name: 'популярности' | 'цене' | 'алфавиту';
   sortProperty: 'rating' | 'price' | 'title';
 };
@@ -9,9 +9,10 @@ type Sort = {
 interface FilterSlice {
   categoryId: number;
   searchValue: string;
-  sortType: Sort;
+  sortType: SortSlice;
   orderType: string;
   currentPage: number;
+  sort: string;
 }
 
 const initialState: FilterSlice = {
@@ -20,33 +21,34 @@ const initialState: FilterSlice = {
   sortType: { name: 'популярности', sortProperty: 'rating' },
   orderType: 'asc',
   currentPage: 1,
+  sort: '',
 };
 
 export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategoryId(state, action) {
+    setCategoryId(state, action: PayloadAction<number>) {
       state.categoryId = action.payload;
     },
-    setSearchValue(state, action) {
+    setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
     },
-    setSortType(state, action) {
+    setSortType(state, action: PayloadAction<SortSlice>) {
       state.sortType = action.payload;
     },
-    setOrderType(state, action) {
+    setOrderType(state, action: PayloadAction<string>) {
       state.orderType = action.payload;
     },
-    setCurrentPage(state, action) {
+    setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    setFilters(state, action) {
+    setFilters(state, action: PayloadAction<FilterSlice>) {
       state.categoryId = Number(action.payload.categoryId);
-      state.sortType.sortProperty = action.payload.sortProperty;
+      state.sortType.sortProperty = action.payload.sortType.sortProperty;
       state.orderType = action.payload.orderType;
       state.currentPage = Number(action.payload.currentPage);
-      state.sortType.name = action.payload.sort.name;
+      state.sortType.name = action.payload.sortType.name;
     },
   },
 });

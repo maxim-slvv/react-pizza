@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterSlice';
 //TODO: сделать сортировку для цен в обратную сторону
 
-type ListItem = {
-  name: string;
+export type ListItem = {
+  name: 'популярности' | 'цене' | 'алфавиту';
   type: string;
-  sortProperty: string;
+  sortProperty: 'rating' | 'price' | 'title';
 };
 
 type PopupClick = MouseEvent & {

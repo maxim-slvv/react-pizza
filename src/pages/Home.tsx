@@ -57,7 +57,7 @@ export const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+      const sort = list.find((obj) => obj.sortProperty === params.sortProperty) || 'rating';
       dispatch(
         setFilters({
           ...params,
@@ -89,8 +89,6 @@ export const Home: React.FC = () => {
       types={obj.types}
       price={obj.price}
       count={obj.count}
-      //TODO проверить нужны ли они
-      // рейтинг и категория где?
     />
   ));
   //TODO: вернуть фэйковый массив на 6 пицц - или не надо будет...
