@@ -22,7 +22,7 @@ export type CartItemProps = {
   count: number;
 };
 
-export const CartItem: React.FC<CartItemProps> = ({
+export const CartItemPage: React.FC<CartItemProps> = ({
   id,
   title,
   price,
