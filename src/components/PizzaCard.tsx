@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { CartItem, addItem, selectCartItemById } from '../redux/slices/cartSlices';
 const typeNames = ['Тонкое', 'Традиционное'];
 
-type PizzaCardProps = {
+export type PizzaCardProps = {
   id: string;
   imageUrl: string;
   title: string;

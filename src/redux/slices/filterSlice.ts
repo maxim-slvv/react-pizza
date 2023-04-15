@@ -1,27 +1,30 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { ListItem } from '../../components/Sort';
 
-type SortSlice = {
-  name: 'популярности' | 'цене' | 'алфавиту';
-  sortProperty: 'rating' | 'price' | 'title';
+type SortInclude = {
+  sort: ListItem;
 };
-
-interface FilterSlice {
+export interface FilterSlice {
   categoryId: number;
   searchValue: string;
-  sortType: SortSlice;
+  sortType: ListItem;
   orderType: string;
   currentPage: number;
-  sort: string;
+  sort: {};
 }
 
 const initialState: FilterSlice = {
   categoryId: 0,
   searchValue: '',
-  sortType: { name: 'популярности', sortProperty: 'rating' },
+  sortType: { name: 'популярности', type: 'asc', sortProperty: 'rating' },
   orderType: 'asc',
   currentPage: 1,
-  sort: '',
+  sort: {
+    name: 'цене',
+    type: 'desc',
+    sortProperty: 'price',
+  },
 };
 
 export const filterSlice = createSlice({
@@ -34,7 +37,7 @@ export const filterSlice = createSlice({
     setSearchValue(state, action: PayloadAction<string>) {
       state.searchValue = action.payload;
     },
-    setSortType(state, action: PayloadAction<SortSlice>) {
+    setSortType(state, action: PayloadAction<ListItem>) {
       state.sortType = action.payload;
     },
     setOrderType(state, action: PayloadAction<string>) {
@@ -43,12 +46,12 @@ export const filterSlice = createSlice({
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
-    setFilters(state, action: PayloadAction<FilterSlice>) {
+    setFilters(state, action: PayloadAction<FilterSlice & SortInclude>) {
       state.categoryId = Number(action.payload.categoryId);
-      state.sortType.sortProperty = action.payload.sortType.sortProperty;
+      state.sortType.sortProperty = action.payload.sort.sortProperty;
       state.orderType = action.payload.orderType;
       state.currentPage = Number(action.payload.currentPage);
-      state.sortType.name = action.payload.sortType.name;
+      state.sortType.name = action.payload.sort.name;
     },
   },
 });

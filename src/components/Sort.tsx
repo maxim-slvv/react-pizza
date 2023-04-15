@@ -5,7 +5,7 @@ import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterS
 
 export type ListItem = {
   name: 'популярности' | 'цене' | 'алфавиту';
-  type: string;
+  type: 'desc' | 'asc';
   sortProperty: 'rating' | 'price' | 'title';
 };
 

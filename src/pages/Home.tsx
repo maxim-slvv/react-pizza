@@ -57,13 +57,12 @@ export const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find((obj) => obj.sortProperty === params.sortProperty) || 'rating';
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        }),
-      );
+      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+      const objFilter: any = {
+        ...params,
+        sort,
+      };
+      dispatch(setFilters(objFilter));
       isSearch.current = true;
     }
     // eslint-disable-next-line

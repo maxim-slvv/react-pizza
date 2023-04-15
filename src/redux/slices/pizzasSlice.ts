@@ -26,14 +26,20 @@ export type Pizza = {
   rating?: number;
 };
 
+export enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
 interface PizzasSliceState {
   items: Pizza[];
-  status: 'loading' | 'success' | 'error';
+  status: Status;
 }
 
 const initialState: PizzasSliceState = {
   items: [],
-  status: 'loading',
+  status: Status.LOADING,
 };
 
 export const pizzasSlice = createSlice({
@@ -47,17 +53,17 @@ export const pizzasSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPizzas.pending, (state) => {
-        state.status = 'loading';
+        state.status = Status.LOADING;
         state.items = []; //очистка во время загрузки
         console.log('Идет отправка');
       })
       .addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.status = 'success';
+        state.status = Status.SUCCESS;
         console.log('все ОК', state);
       })
       .addCase(fetchPizzas.rejected, (state) => {
-        state.status = 'error';
+        state.status = Status.ERROR;
         state.items = []; //очищаем если ошибка что бы старые не хранить
         console.log('Была ошибка');
       });
