@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, setCategoryId } from '../redux/slices/filterSlice';
+import { useWhyDidYouUpdate } from 'ahooks';
 
-export const Categories: React.FC = () => {
+export const Categories: React.FC = React.memo(() => {
   const { categoryId } = useSelector(selectFilter);
-
   const dispatch = useDispatch();
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
@@ -29,4 +29,4 @@ export const Categories: React.FC = () => {
       </ul>
     </div>
   );
-};
+});

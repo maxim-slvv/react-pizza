@@ -51,8 +51,9 @@ export const Home: React.FC = () => {
     if (!window.location.search) {
       dispatch(fetchPizzas({}));
     }
+    //TODO удалить searchValue
     // eslint-disable-next-line
-  }, [categoryId, sortType, orderType, searchValue, currentPage]);
+  }, [categoryId, sortType, orderType, currentPage]);
 
   React.useEffect(() => {
     if (window.location.search) {

@@ -19,7 +19,7 @@ export const list: ListItem[] = [
   { name: 'алфавиту', type: 'asc', sortProperty: 'title' },
 ];
 
-export const Sort: React.FC = () => {
+export const Sort: React.FC = React.memo(() => {
   const { sortType } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -89,4 +89,4 @@ export const Sort: React.FC = () => {
       <button onClick={() => onClickArrow('desc')}> ↓ </button>
     </div>
   );
-};
+});

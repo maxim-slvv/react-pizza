@@ -22,7 +22,7 @@ export function Header() {
             </div>
           </div>
         </Link>
-        <Search />
+        {location.pathname !== '/cart' && <Search />}
         {location.pathname !== '/cart' && (
           <Link to="/cart">
             <div className="header__cart">
