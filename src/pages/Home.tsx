@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setFilters, selectFilter } from '../redux/slices/filterSlice';
+import { setFilters, selectFilter, FilterSlice, SortInclude } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
 import { Categories } from '../components/Categories';
@@ -23,14 +23,12 @@ export const Home: React.FC = () => {
   const { items, status } = useSelector(selectPizzas);
 
   //TODO: сделать сортировку для цен в обратную сторону
-
+  var page = `&page=${currentPage}&limit=4`;
+  var category = categoryId ? `category=${categoryId}` : '';
+  var sortBy = sortType.sortProperty ? `&sortBy=${sortType.sortProperty}` : '';
+  var order = orderType ? `&order=${orderType}` : '';
+  var search = searchValue ? `&search=${searchValue}` : '';
   const getPizzas = async () => {
-    const page = `&page=${currentPage}&limit=4`;
-    const category = categoryId ? `category=${categoryId}` : '';
-    const sortBy = sortType.sortProperty ? `&sortBy=${sortType.sortProperty}` : '';
-    const order = orderType ? `&order=${orderType}` : '';
-    const search = searchValue ? `&search=${searchValue}` : '';
-
     dispatch(fetchPizzas({ page, category, sortBy, order, search }));
   };
 
@@ -48,21 +46,22 @@ export const Home: React.FC = () => {
     isMounted.current = true;
     //TODO: при обновлении страницы сделать так что бы отправлялся запрос
     //*это был переломный 15 видос
-    if (!window.location.search) {
-      dispatch(fetchPizzas({}));
+    //TODO: убрал отрицание - потом если что пофиксить
+    if (window.location.search) {
+      dispatch(fetchPizzas({ page, category, sortBy, order, search }));
     }
     //TODO удалить searchValue
     // eslint-disable-next-line
-  }, [categoryId, sortType, orderType, currentPage]);
+  }, [categoryId, sortType, orderType, searchValue, currentPage]);
 
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
-      const objFilter: any = {
+      const objFilter = {
         ...params,
         sort,
-      };
+      } as FilterSlice & SortInclude;
       dispatch(setFilters(objFilter));
       isSearch.current = true;
     }

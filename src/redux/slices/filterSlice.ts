@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { ListItem } from '../../components/Sort';
 
-type SortInclude = {
+export type SortInclude = {
   sort: ListItem;
 };
 export interface FilterSlice {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search } from '../components/Search/';
 import { useSelector } from 'react-redux';
@@ -8,6 +9,12 @@ import { selectCart } from '../redux/slices/cartSlices';
 export function Header() {
   const { items, totalPrice } = useSelector(selectCart);
   const location = useLocation();
+
+  React.useEffect(() => {
+    const json = JSON.stringify(items);
+    console.log(json);
+  }, [items]);
+
   //TODO убрать ANY
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   return (
@@ -22,6 +29,8 @@ export function Header() {
             </div>
           </div>
         </Link>
+        {/* //TODO сделать надпись - поиск по запросу вместо категорий рендерить название
+        //TODO и можно ограничить поле ввода на кол-во символов */}
         {location.pathname !== '/cart' && <Search />}
         {location.pathname !== '/cart' && (
           <Link to="/cart">
