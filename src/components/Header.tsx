@@ -9,10 +9,16 @@ import { selectCart } from '../redux/slices/cartSlices';
 export function Header() {
   const { items, totalPrice } = useSelector(selectCart);
   const location = useLocation();
+  const isMounted = React.useRef(false);
 
   React.useEffect(() => {
-    const json = JSON.stringify(items);
-    console.log(json);
+    //!код не сработает при первом рендере
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      window.localStorage.setItem('cart', json);
+      console.log('второй рендер');
+    }
+    isMounted.current = true;
   }, [items]);
 
   //TODO убрать ANY
