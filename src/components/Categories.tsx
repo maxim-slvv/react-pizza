@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter, setCategoryId } from '../redux/slices/filterSlice';
-import { useWhyDidYouUpdate } from 'ahooks';
 
 export const Categories: React.FC = React.memo(() => {
   const { categoryId } = useSelector(selectFilter);
