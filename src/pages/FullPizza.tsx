@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export const FullPizza: React.FC = () => {
+const FullPizza: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pizza, setPizza] = React.useState<{
@@ -37,6 +37,12 @@ export const FullPizza: React.FC = () => {
       <h2>{pizza.id}</h2>
       <p>{pizza.title}</p>
       <h4>{pizza.price} БУБЛИКОВ</h4>
+      <Link to="/">
+        <button className="button button--outline button--add go-back-btn">
+          <span>На главную</span>
+        </button>
+      </Link>
     </div>
   );
 };
+export default FullPizza;
