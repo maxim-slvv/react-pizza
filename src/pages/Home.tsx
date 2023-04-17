@@ -6,14 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { setFilters, selectFilter, FilterSlice, SortInclude } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
-import { Categories } from '../components/Categories';
-import { Sort, list } from '../components/Sort';
-import { PizzaCard } from '../components/PizzaCard';
-import { PizzaSkeleton } from '../components/PizzaSkeleton';
-import { Pagination } from '../components/Pagination';
+import { Pagination, PizzaSkeleton, PizzaCard, Categories, Sort, list } from '../components';
+
 import { useAppDispatch } from '../redux/store';
 
-export const Home: React.FC = () => {
+const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
@@ -112,3 +109,4 @@ export const Home: React.FC = () => {
     </div>
   );
 };
+export default Home;

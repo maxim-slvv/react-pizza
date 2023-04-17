@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import logoSvg from '../assets/img/pizza-logo.svg';
 import { selectCart } from '../redux/slices/cartSlices';
 
-export function Header() {
+export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const location = useLocation();
   const isMounted = React.useRef(false);
@@ -80,4 +80,4 @@ export function Header() {
       </div>
     </div>
   );
-}
+};

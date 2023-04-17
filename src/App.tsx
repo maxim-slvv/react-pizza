@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home } from './pages/Home';
+import Home from './pages/Home';
 
 import './scss/app.scss';
 import { MainLayout } from './layouts/MainLayout';
 
-const Cart = React.lazy(() => import('./pages/Cart'));
-const NotFound = React.lazy(() => import('./pages/NotFound'));
-const FullPizza = React.lazy(() => import('./pages/FullPizza'));
+const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
+const NotFound = React.lazy(() => import(/* webpackChunkName: "NotFound" */ './pages/NotFound'));
+const FullPizza = React.lazy(() => import(/* webpackChunkName: "FullPizza" */ './pages/FullPizza'));
 
 export function App() {
   return (
