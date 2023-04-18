@@ -21,7 +21,7 @@ const Home: React.FC = () => {
 
   //TODO: сделать сортировку для цен в обратную сторону
   var page = `&page=${currentPage}&limit=4`;
-  var category = categoryId ? `category=${categoryId}` : '';
+  var category = categoryId ? `&category=${categoryId}` : '';
   var sortBy = sortType.sortProperty ? `&sortBy=${sortType.sortProperty}` : '';
   var order = orderType ? `&order=${orderType}` : '';
   var search = searchValue ? `&search=${searchValue}` : '';
@@ -33,9 +33,9 @@ const Home: React.FC = () => {
     if (isMounted.current) {
       //!ПОНАЧАЛУ ЭТОГО НЕ БУДЕТ
       const queryString = qs.stringify({
-        sortProperty: sortType.sortProperty,
-        categoryId,
         currentPage,
+        categoryId,
+        sortProperty: sortType.sortProperty,
         orderType,
       });
       navigate(`?${queryString}`);
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
       isSearch.current = true;
     }
     // eslint-disable-next-line
-  }, []);
+  }, [categoryId]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -105,7 +105,7 @@ const Home: React.FC = () => {
       //TODO: тоесть налету меняется картинка и потом медленно сужение изображения
       //TODO: а в корзине будут высвечиваться добавки и прочее */}
       <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
-      <Pagination />
+      {categoryId === 0 && <Pagination />}
     </div>
   );
 };

@@ -95,7 +95,7 @@ const Cart: React.FC = () => {
             <span>Очистить корзину</span>
           </div>
         </div>
-        <div className="content__items">
+        <div className="content__items content__items_cart">
           {/* TODO типизировать item */}
           {items.map((item: any) => (
             <CartItemPage key={item.id} {...item} />

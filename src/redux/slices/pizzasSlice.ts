@@ -24,6 +24,7 @@ export type Pizza = {
   price: number;
   category?: number;
   rating?: number;
+  description?: string;
 };
 
 export enum Status {

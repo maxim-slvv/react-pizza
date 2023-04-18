@@ -6,6 +6,7 @@ const FullPizza: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pizza, setPizza] = React.useState<{
+    descripton: string;
     imageUrl: string;
     id: string;
     title: string;
@@ -30,18 +31,24 @@ const FullPizza: React.FC = () => {
   if (!pizza) {
     return <div>загрузка...</div>;
   }
-
   return (
     <div className="container">
-      <img src={pizza.imageUrl} width={200} height={200} alt="" />
-      <h2>{pizza.id}</h2>
-      <p>{pizza.title}</p>
-      <h4>{pizza.price} БУБЛИКОВ</h4>
-      <Link to="/">
-        <button className="button button--outline button--add go-back-btn">
-          <span>На главную</span>
-        </button>
-      </Link>
+      <div className="fullpizza">
+        <div className="fullpizza__top">
+          <img className="fullpizza__image" src={pizza.imageUrl} alt="" />
+          <div className="fullpizza__title">
+            <h2 className="pizza-block__title">{pizza.title}</h2>
+          </div>
+          <span className="fullpizza__description">{pizza.descripton}</span>
+        </div>
+        <div className="fullpizza__bottom">
+          <Link to="/">
+            <button className="button button--outline button--add go-back-btn">
+              <span>Вернуться назад</span>
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
