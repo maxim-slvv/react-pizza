@@ -118,7 +118,6 @@ body {
 }
 
 .cart {
-  min-height: auto;
   display: flex;
   flex-direction: column;
   &__top {
@@ -194,11 +193,13 @@ body {
     }
   }
   .content__items_cart {
-    flex: 1;
+    height: 100%;
+    flex: 1 0 auto;
   }
 
   &__item {
     display: flex;
+    flex: 1 0 auto;
     border-top: 1px solid $gray-line;
     padding-top: 30px;
     margin-top: 30px;
@@ -212,7 +213,6 @@ body {
       align-items: center;
       margin-right: 15px;
       width: 10%;
-
       img {
         width: 80px;
       }
@@ -318,7 +318,7 @@ body {
   }
 
   &__bottom {
-    margin: 50px 0;
+    margin: 50px 0 0;
 
     &-details {
       display: flex;
