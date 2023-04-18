@@ -13,17 +13,7 @@ type CartItem = {
   count: number;
 };
 
-export type CartItemProps = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  size: number;
-  count: number;
-};
-
-export const CartItemPage: React.FC<CartItemProps> = ({
+export const CartItemPage: React.FC<CartItem> = ({
   id,
   title,
   price,

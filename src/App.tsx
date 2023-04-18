@@ -18,7 +18,7 @@ export function App() {
         <Route
           path="cart"
           element={
-            <Suspense fallback={<div>Загрузка...</div>}>
+            <Suspense fallback={<div></div>}>
               <Cart />
             </Suspense>
           }
@@ -26,7 +26,7 @@ export function App() {
         <Route
           path="pizza/:id"
           element={
-            <Suspense fallback={<div>Загрузка...</div>}>
+            <Suspense fallback={<div></div>}>
               <FullPizza />
             </Suspense>
           }
@@ -34,7 +34,7 @@ export function App() {
         <Route
           path="*"
           element={
-            <Suspense fallback={<div>Загрузка...</div>}>
+            <Suspense fallback={<div></div>}>
               <NotFound />
             </Suspense>
           }

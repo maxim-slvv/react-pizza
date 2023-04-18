@@ -16,8 +16,7 @@ export const Pagination: React.FC = () => {
       onPageChange={(event) => dispatch(setCurrentPage(event.selected + 1))}
       forcePage={currentPage - 1}
       pageRangeDisplayed={4} //?будет отображаться 4 компонента
-      pageCount={3} //?страниц будет 3 (в идеале backend должен вернуть число страниц
-      //? и мы бы его сюда подставили)
+      pageCount={3} //?страниц будет 3 (в идеале backend должен возвращать число страниц
       previousLabel="<"
     />
   );

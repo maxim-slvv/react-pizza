@@ -12,8 +12,6 @@ export type PizzaCardProps = {
   sizes: number[];
   types: number[];
   price: number;
-  //TODO: поправить
-  count: 0;
 };
 
 export const PizzaCard: React.FC<PizzaCardProps> = ({

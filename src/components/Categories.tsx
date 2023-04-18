@@ -7,8 +7,7 @@ export const Categories: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  //TODO типизировать id
-  const onChangeCategory = (id: any) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 

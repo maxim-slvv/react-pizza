@@ -6,13 +6,13 @@ const FullPizza: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pizza, setPizza] = React.useState<{
-    descripton: string;
+    description: string;
     imageUrl: string;
     id: string;
     title: string;
     price: number;
   }>();
-  console.log(pizza);
+
   React.useEffect(() => {
     const getPizza = async () => {
       try {
@@ -26,6 +26,7 @@ const FullPizza: React.FC = () => {
       }
     };
     getPizza();
+    // eslint-disable-next-line
   }, []);
 
   if (!pizza) {
@@ -39,7 +40,7 @@ const FullPizza: React.FC = () => {
           <div className="fullpizza__title">
             <h2 className="pizza-block__title">{pizza.title}</h2>
           </div>
-          <span className="fullpizza__description">{pizza.descripton}</span>
+          <span className="fullpizza__description">{pizza.description}</span>
         </div>
         <div className="fullpizza__bottom">
           <Link to="/">

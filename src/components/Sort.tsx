@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortType, setOrderType, selectFilter } from '../redux/slices/filterSlice';
-//TODO: сделать сортировку для цен в обратную сторону
 
 export type ListItem = {
   name: 'популярности' | 'цене' | 'алфавиту';

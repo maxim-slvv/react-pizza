@@ -3,8 +3,6 @@ import { RootState } from '../store';
 import { getCartFromLS } from '../../utils/getCartFromLS';
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
 
-//TODO: сделать нормальное отображение цены в корзине - при удалении товаров - ценник не меняется
-
 export type CartItem = {
   id: string;
   title: string;
@@ -32,7 +30,6 @@ export const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
-      // получbть полностью id
       const findItem = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem !== undefined) {
         findItem.count++;

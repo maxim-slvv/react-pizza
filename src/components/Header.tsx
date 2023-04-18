@@ -4,7 +4,7 @@ import { Search } from '../components/Search/';
 import { useSelector } from 'react-redux';
 
 import logoSvg from '../assets/img/pizza-logo.svg';
-import { selectCart } from '../redux/slices/cartSlices';
+import { CartItem, selectCart } from '../redux/slices/cartSlices';
 
 export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
@@ -12,17 +12,14 @@ export const Header: React.FC = () => {
   const isMounted = React.useRef(false);
 
   React.useEffect(() => {
-    //!код не сработает при первом рендере
     if (isMounted.current) {
       const json = JSON.stringify(items);
       window.localStorage.setItem('cart', json);
-      console.log('второй рендер');
     }
     isMounted.current = true;
   }, [items]);
 
-  //TODO убрать ANY
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: CartItem) => sum + item.count, 0);
   return (
     <div className="header">
       <div className="container">
@@ -35,8 +32,6 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </Link>
-        {/* //TODO сделать надпись - поиск по запросу вместо категорий рендерить название
-        //TODO и можно ограничить поле ввода на кол-во символов */}
         {location.pathname !== '/cart' && <Search />}
         {location.pathname !== '/cart' && (
           <Link to="/cart">

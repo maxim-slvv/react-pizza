@@ -14,9 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   background-color: #ffffff;
-
   margin: 50px auto;
   border-radius: 10px;
   height: 100%;
@@ -384,6 +382,7 @@ body {
   }
 
   &--empty {
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;

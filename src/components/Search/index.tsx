@@ -9,10 +9,9 @@ import styles from './Search.module.scss';
 export const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState('');
-  // eslint-disable-next-line
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
-    //TODO типизировать str
-    debounce((str: any) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 400),
     [],

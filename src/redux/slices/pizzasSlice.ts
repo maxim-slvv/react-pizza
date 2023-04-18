@@ -55,17 +55,15 @@ export const pizzasSlice = createSlice({
     builder
       .addCase(fetchPizzas.pending, (state) => {
         state.status = Status.LOADING;
-        state.items = []; //очистка во время загрузки
-        // console.log('Идет отправка');
+        state.items = [];
       })
       .addCase(fetchPizzas.fulfilled, (state, action) => {
         state.items = action.payload;
         state.status = Status.SUCCESS;
-        // console.log('все ОК', state);
       })
       .addCase(fetchPizzas.rejected, (state) => {
         state.status = Status.ERROR;
-        state.items = []; //очищаем если ошибка что бы старые не хранить
+        state.items = [];
         alert('Ошибка загрузки питс');
       });
   },

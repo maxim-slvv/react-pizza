@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearItems, selectCart } from '../redux/slices/cartSlices';
+import { CartItem, clearItems, selectCart } from '../redux/slices/cartSlices';
 
 import { CartEmpty } from '../components/CartEmpty';
 import { CartItemPage } from '../components/CartItem';
@@ -9,7 +9,7 @@ import { CartItemPage } from '../components/CartItem';
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: CartItem) => sum + item.count, 0);
   const onClickClear = () => {
     if (window.confirm('Очистить корзину?')) {
       dispatch(clearItems());
@@ -96,8 +96,7 @@ const Cart: React.FC = () => {
           </div>
         </div>
         <div className="content__items content__items_cart">
-          {/* TODO типизировать item */}
-          {items.map((item: any) => (
+          {items.map((item: CartItem) => (
             <CartItemPage key={item.id} {...item} />
           ))}
         </div>
@@ -127,11 +126,9 @@ const Cart: React.FC = () => {
                     stroke-linejoin="round"
                   />
                 </svg>
-
                 <span>Вернуться назад</span>
               </button>
             </Link>
-
             <div className="button pay-btn">
               <span>Оплатить сейчас</span>
             </div>
